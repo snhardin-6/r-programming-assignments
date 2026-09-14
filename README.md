@@ -35,8 +35,7 @@ print(mean_CBS)
 print(median_CBS)
 print(range_CBS)
 
-# Add difference column
-# Note: assignment contains a typo. Use ABC_poll, not ABC_pol.
+
 df_polls$Diff <- df_polls$CBS_poll - df_polls$ABC_poll
 
 print(df_polls)
