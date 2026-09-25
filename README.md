@@ -3,93 +3,42 @@
 Sydney Hardin
 
 LIS4370
-# Create vectors
+# Assignment #4 - Matrix Algebra in R
 
-Frequency <- c(0.6, 0.3, 0.4, 0.4, 0.2, 0.6, 0.3, 0.4, 0.9, 0.2)
+# Create matrices
+A <- matrix(1:100, nrow = 10)
+B <- matrix(1:1000, nrow = 10)
 
-BloodPressure <- c(103, 87, 32, 42, 59, 109, 78, 205, 135, 176)
+# Inspect dimensions
+dimA <- dim(A)
+dimB <- dim(B)
 
-FirstAssess <- c(1, 1, 1, 1, 0, 0, 0, 0, NA, 1)      # bad=1, good=0
+print(dimA)
+print(dimB)
 
-SecondAssess <- c(0, 0, 1, 1, 0, 0, 1, 1, 1, 1)      # low=0, high=1
-
-FinalDecision <- c(0, 1, 0, 1, 0, 1, 0, 1, 1, 1)     # low=0, high=1
-
-# Create data frame
-
-df_hosp <- data.frame(
-  Frequency,
-  BloodPressure,
-  FirstAssess,
-  SecondAssess,
-  FinalDecision,
-  stringsAsFactors = FALSE
+# Compute inverse and determinant with error handling
+invA <- tryCatch(
+  solve(A),
+  error = function(e) e
 )
 
-# Inspect and remove missing values
-
-summary(df_hosp)
-
-df_hosp <- na.omit(df_hosp)
-
-
-png("BP_FirstAssess.png")
-
-boxplot(
-  BloodPressure ~ FirstAssess,
-  data = df_hosp,
-  names = c("Good", "Bad"),
-  ylab = "Blood Pressure",
-  main = "BP by First MD Assessment"
+detA <- tryCatch(
+  det(A),
+  error = function(e) e
 )
 
-dev.off()
-
-
-png("BP_SecondAssess.png")
-
-boxplot(
-  BloodPressure ~ SecondAssess,
-  data = df_hosp,
-  names = c("Low", "High"),
-  ylab = "Blood Pressure",
-  main = "BP by Second MD Assessment"
+invB <- tryCatch(
+  solve(B),
+  error = function(e) e
 )
 
-dev.off()
-
-
-png("BP_FinalDecision.png")
-
-boxplot(
-  BloodPressure ~ FinalDecision,
-  data = df_hosp,
-  names = c("Low", "High"),
-  ylab = "Blood Pressure",
-  main = "BP by Final Decision"
+detB <- tryCatch(
+  det(B),
+  error = function(e) e
 )
 
-dev.off()
-
-png("Histogram_Frequency.png")
-
-hist(
-  df_hosp$Frequency,
-  breaks = seq(0, 1, by = 0.1),
-  xlab = "Visit Frequency",
-  main = "Histogram of Visit Frequency"
-)
-
-dev.off()
-
-
-png("Histogram_BloodPressure.png")
-
-hist(
-  df_hosp$BloodPressure,
-  breaks = 8,
-  xlab = "Blood Pressure",
-  main = "Histogram of Blood Pressure"
-)
-
-dev.off()
+# Display results
+print(invA)
+print(detA)
+print(invB)
+print(detB)
