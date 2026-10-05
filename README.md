@@ -2,43 +2,22 @@
 
 Sydney Hardin
 
-LIS4370
-# Assignment #4 - Matrix Algebra in R
+# Assignment 6: Matrix Operations and Construction
 
-# Create matrices
-A <- matrix(1:100, nrow = 10)
-B <- matrix(1:1000, nrow = 10)
+# Task 1
+A <- matrix(c(2, 0, 1, 3), ncol = 2)
+B <- matrix(c(5, 2, 4, -1), ncol = 2)
 
-# Inspect dimensions
-dimA <- dim(A)
-dimB <- dim(B)
+A + B
+A - B
 
-print(dimA)
-print(dimB)
+# Task 2
+D <- diag(c(4, 1, 2, 3))
+D
 
-# Compute inverse and determinant with error handling
-invA <- tryCatch(
-  solve(A),
-  error = function(e) e
-)
+# Task 3
+M <- diag(3, 5)
+M[1, ] <- c(3, 1, 1, 1, 1)
+M[2:5, 1] <- 2
 
-detA <- tryCatch(
-  det(A),
-  error = function(e) e
-)
-
-invB <- tryCatch(
-  solve(B),
-  error = function(e) e
-)
-
-detB <- tryCatch(
-  det(B),
-  error = function(e) e
-)
-
-# Display results
-print(invA)
-print(detA)
-print(invB)
-print(detB)
+M
